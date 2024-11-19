@@ -1,32 +1,24 @@
-const fs = require('fs');
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  productionBrowserSourceMaps: false, // 禁用 Source Maps，减小构建体积
-
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'], // 自定义页面扩展名
-
+  productionBrowserSourceMaps: false, // enable browser source map generation during the production build
+  // Configure pageExtensions to include md and mdx
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   experimental: {
-    runtime: 'edge', // 启用 Edge Runtime
+    // appDir: true,
   },
-
+  // fix all before production. Now it slow the develop speed.
   eslint: {
-    ignoreDuringBuilds: true, // 忽略构建时的 ESLint 错误
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
   },
-
   typescript: {
-    ignoreBuildErrors: true, // 忽略构建时的 TypeScript 错误
+    // https://nextjs.org/docs/api-reference/next.config.js/ignoring-typescript-errors
+    ignoreBuildErrors: true,
   },
 
   webpack: (config) => {
-    // 配置代码分割以减少单个文件大小
-    config.optimization.splitChunks = {
-      chunks: 'all',
-      maxSize: 200000, // 设置最大 chunk 大小为 200KB
-    };
 
-    // 自动删除 .next/cache 文件夹以避免上传过大体积
     config.plugins.push({
       apply: (compiler) => {
         compiler.hooks.done.tap('RemoveCachePlugin', () => {
@@ -40,8 +32,6 @@ const nextConfig = {
 
     return config;
   },
+}
 
-  outputFileTracing: false, // 减少输出文件
-};
-
-module.exports = nextConfig;
+module.exports = nextConfig
