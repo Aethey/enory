@@ -16,22 +16,6 @@ const nextConfig = {
     // https://nextjs.org/docs/api-reference/next.config.js/ignoring-typescript-errors
     ignoreBuildErrors: true,
   },
-
-  webpack: (config) => {
-
-    config.plugins.push({
-      apply: (compiler) => {
-        compiler.hooks.done.tap('RemoveCachePlugin', () => {
-          const cacheDir = path.resolve('.next/cache');
-          if (fs.existsSync(cacheDir)) {
-            fs.rmdirSync(cacheDir, { recursive: true });
-          }
-        });
-      },
-    });
-
-    return config;
-  },
 }
 
 module.exports = nextConfig
