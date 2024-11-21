@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
-
 import type { IMainProps } from '@/app/components'
 import Main from '@/app/components'
 
