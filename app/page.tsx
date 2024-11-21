@@ -41,8 +41,11 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen px-10 py-10 bg-black text-white">
       {/* 标题和简介 */}
       <div className="text-center mb-16">
-        <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-fade-in-out">
-          What's Your Next Move?
+        <h1
+          key={messages[currentIndex].lang} // 每次切换时触发动画
+          className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-fade-in-out"
+        >
+          {messages[currentIndex].text}
         </h1>
         <p className="mt-4 text-lg text-gray-300 flex items-center justify-center gap-2 animate-fade-in">
           🚧 <span>Under Construction</span> 🔧⚙️
