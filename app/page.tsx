@@ -4,10 +4,16 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'; // 用于页面跳转
 import { MdOutlineTouchApp } from 'react-icons/md'; // 示例图标
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { RootState } from './store';
+import { toggleDarkMode } from './store';
+import { useSelector, useDispatch } from 'react-redux';
+import ToggleSwitch from './components/home/ToggleSwitch';
+
 import Link from 'next/link';
 
 export default function HomePage() {
-
+  const isDarkMode = useSelector((state: RootState) => state.darkMode.isDarkMode);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
@@ -28,9 +34,6 @@ export default function HomePage() {
     }
   };
 
-
-
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % messages.length);
@@ -38,11 +41,16 @@ export default function HomePage() {
     return () => clearInterval(interval); // 清理定时器
   }, [messages.length]);
   return (
-    <div className="flex flex-col min-h-screen px-10 py-10 bg-black text-white">
+    <div className={`flex flex-col min-h-screen px-10 py-10 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      {/* 标题栏 */}
+      <ToggleSwitch />
       {/* 标题和简介 */}
       <div className="text-center mb-16">
-        <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-fade-in-out">
-          What's Your Next Move?
+        <h1
+          key={messages[currentIndex].lang} // 每次切换时触发动画
+          className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-fade-in-out"
+        >
+          {messages[currentIndex].text}
         </h1>
         <p className="mt-4 text-lg text-gray-300 flex items-center justify-center gap-2 animate-fade-in">
           🚧 <span>Under Construction</span> 🔧⚙️

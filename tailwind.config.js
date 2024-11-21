@@ -60,6 +60,9 @@ module.exports = {
         pc: '769px',
         // => @media (min-width: 769px) { ... }
       },
+      transitionDuration: {
+        300: '300ms', // 添加平滑过渡时间
+      },
     },
   },
   plugins: [
