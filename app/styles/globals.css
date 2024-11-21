@@ -143,3 +143,89 @@ a {
   background-size: 200% 200%;
   animation: gradient 6s ease infinite;
 }
+
+/* 渐变文字动画 */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-gradient {
+  animation: gradientBackground 3s infinite ease-in-out;
+  background-size: 200% 200%;
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-out;
+}
+
+/* 渐入和渐出动画 */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-fade-in-out {
+  animation: fadeInOut 3s ease-in-out infinite; /* 动画持续3秒，循环 */
+}
+
+/* 音符跳动动画 */
+@keyframes bounceNote {
+  0%, 100% {
+    transform: scaleY(0.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-note {
+  animation: bounceNote 1s ease-in-out infinite;
+}
+
+.animate-bounce-note.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-bounce-note.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-bounce-note.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animate-bounce-note.delay-400 {
+  animation-delay: 0.4s;
+}
