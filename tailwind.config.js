@@ -48,6 +48,9 @@ module.exports = {
           100: '#E0EAFF',
           600: '#444CE7',
         },
+        // Material Design 3 常见渐变色
+        gradientStart: '#ff7eb3',
+        gradientEnd: '#ffc47e',
       },
       screens: {
         mobile: '100px',
