@@ -1,0 +1,475 @@
+.
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── app
+│   ├── api
+│   │   ├── chat-messages
+│   │   │   └── route.ts
+│   │   ├── conversations
+│   │   │   ├── [conversationId]
+│   │   │   │   └── name
+│   │   │   │       └── route.ts
+│   │   │   └── route.ts
+│   │   ├── file-upload
+│   │   │   └── route.ts
+│   │   ├── messages
+│   │   │   ├── [messageId]
+│   │   │   │   └── feedbacks
+│   │   │   │       └── route.ts
+│   │   │   └── route.ts
+│   │   ├── parameters
+│   │   │   └── route.ts
+│   │   └── utils
+│   │       └── common.ts
+│   ├── components
+│   │   ├── app-unavailable.tsx
+│   │   ├── base
+│   │   │   ├── app-icon
+│   │   │   │   ├── index.tsx   自定义页面上方的icon
+│   │   │   │   └── style.module.css
+│   │   │   ├── auto-height-textarea
+│   │   │   │   └── index.tsx
+│   │   │   ├── button
+│   │   │   │   └── index.tsx
+│   │   │   ├── icons
+│   │   │   │   ├── IconBase.tsx
+│   │   │   │   ├── line
+│   │   │   │   │   ├── alert-circle
+│   │   │   │   │   │   ├── AlertCircle.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── alert-triangle
+│   │   │   │   │   │   ├── AlertTriangle.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── arrows
+│   │   │   │   │   │   ├── chevron-down
+│   │   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   │   └── collapse-04
+│   │   │   │   │   │       ├── Collapse04.json
+│   │   │   │   │   │       └── index.tsx
+│   │   │   │   │   ├── check-circle
+│   │   │   │   │   │   ├── CheckCircle.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── chevron-right
+│   │   │   │   │   │   ├── ChevronRight.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── files
+│   │   │   │   │   │   ├── Clipboard.json
+│   │   │   │   │   │   ├── Clipboard.tsx
+│   │   │   │   │   │   ├── ClipboardCheck.json
+│   │   │   │   │   │   ├── ClipboardCheck.tsx
+│   │   │   │   │   │   └── index.ts
+│   │   │   │   │   ├── image-plus
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── link-03
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── loading-02
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── refresh-ccw-01
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── upload-03
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── x-close
+│   │   │   │   │       ├── data.json
+│   │   │   │   │       └── index.tsx
+│   │   │   │   ├── public
+│   │   │   │   │   └── data-set
+│   │   │   │   │       ├── data.json
+│   │   │   │   │       └── index.tsx
+│   │   │   │   ├── solid
+│   │   │   │   │   ├── alert-circle
+│   │   │   │   │   │   ├── AlertCircle.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── alert-triangle
+│   │   │   │   │   │   ├── data.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   ├── expand-04
+│   │   │   │   │   │   ├── Expand04.json
+│   │   │   │   │   │   └── index.tsx
+│   │   │   │   │   └── general
+│   │   │   │   │       └── check-circle
+│   │   │   │   │           ├── data.json
+│   │   │   │   │           └── index.tsx
+│   │   │   │   ├── utils.tsx
+│   │   │   │   └── workflow
+│   │   │   │       ├── Answer.json
+│   │   │   │       ├── Answer.tsx
+│   │   │   │       ├── Code.json
+│   │   │   │       ├── Code.tsx
+│   │   │   │       ├── End.json
+│   │   │   │       ├── End.tsx
+│   │   │   │       ├── Home.json
+│   │   │   │       ├── Home.tsx
+│   │   │   │       ├── Http.json
+│   │   │   │       ├── Http.tsx
+│   │   │   │       ├── IfElse.json
+│   │   │   │       ├── IfElse.tsx
+│   │   │   │       ├── KnowledgeRetrieval.json
+│   │   │   │       ├── KnowledgeRetrieval.tsx
+│   │   │   │       ├── Llm.json
+│   │   │   │       ├── Llm.tsx
+│   │   │   │       ├── QuestionClassifier.json
+│   │   │   │       ├── QuestionClassifier.tsx
+│   │   │   │       ├── TemplatingTransform.json
+│   │   │   │       ├── TemplatingTransform.tsx
+│   │   │   │       ├── VariableX.json
+│   │   │   │       ├── VariableX.tsx
+│   │   │   │       └── index.ts
+│   │   │   ├── image-gallery
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── style.module.css
+│   │   │   ├── image-uploader
+│   │   │   │   ├── chat-image-uploader.tsx
+│   │   │   │   ├── hooks.ts
+│   │   │   │   ├── image-link-input.tsx
+│   │   │   │   ├── image-list.tsx
+│   │   │   │   ├── image-preview.tsx
+│   │   │   │   ├── uploader.tsx
+│   │   │   │   └── utils.ts
+│   │   │   ├── loading
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── style.css
+│   │   │   ├── markdown.tsx
+│   │   │   ├── portal-to-follow-elem
+│   │   │   │   └── index.tsx
+│   │   │   ├── select
+│   │   │   │   └── index.tsx
+│   │   │   ├── spinner
+│   │   │   │   └── index.tsx
+│   │   │   ├── toast
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── style.module.css
+│   │   │   ├── tooltip
+│   │   │   │   └── index.tsx
+│   │   │   └── tooltip-plus
+│   │   │       └── index.tsx
+│   │   ├── chat
+│   │   │   ├── answer
+│   │   │   │   └── index.tsx
+│   │   │   ├── icons
+│   │   │   │   ├── answer.svg
+│   │   │   │   ├── default-avatar.jpg
+│   │   │   │   ├── edit.svg
+│   │   │   │   ├── question.svg
+│   │   │   │   ├── robot.svg
+│   │   │   │   ├── send-active.svg
+│   │   │   │   ├── send.svg
+│   │   │   │   ├── typing.svg
+│   │   │   │   └── user.svg
+│   │   │   ├── index.tsx
+│   │   │   ├── loading-anim
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── style.module.css
+│   │   │   ├── question
+│   │   │   │   └── index.tsx
+│   │   │   ├── style.module.css  自定义AI的图标
+│   │   │   ├── thought
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── panel.tsx
+│   │   │   │   ├── style.module.css
+│   │   │   │   └── tool.tsx
+│   │   │   └── type.ts
+│   │   ├── config-scence
+│   │   │   └── index.tsx
+│   │   ├── header.tsx
+│   │   ├── index.tsx
+│   │   ├── sidebar
+│   │   │   ├── card.module.css
+│   │   │   ├── card.tsx
+│   │   │   └── index.tsx
+│   │   ├── value-panel
+│   │   │   ├── index.tsx
+│   │   │   └── style.module.css
+│   │   ├── welcome
+│   │   │   ├── icons
+│   │   │   │   └── logo.png
+│   │   │   ├── index.tsx
+│   │   │   ├── massive-component.tsx
+│   │   │   └── style.module.css
+│   │   └── workflow
+│   │       ├── block-icon.tsx
+│   │       ├── code-editor
+│   │       │   ├── index.tsx
+│   │       │   └── style.css
+│   │       ├── editor
+│   │       │   ├── base.tsx
+│   │       │   ├── prompt-editor-height-resize-wrap.tsx
+│   │       │   ├── toggle-expand-btn.tsx
+│   │       │   └── use-toggle-expend.ts
+│   │       ├── node.tsx
+│   │       └── workflow-process.tsx
+│   ├── global.d.ts
+│   ├── layout.tsx
+│   ├── main
+│   │   └── page.tsx
+│   ├── page.tsx
+│   └── styles
+│       ├── globals.css
+│       └── markdown.scss
+├── config
+│   └── index.ts
+├── hooks
+│   ├── use-breakpoints.ts
+│   └── use-conversation.ts
+├── i18n
+│   ├── client.ts
+│   ├── i18next-config.ts
+│   ├── i18next-serverside-config.ts
+│   ├── index.ts
+│   ├── lang
+│   │   ├── app.en.ts
+│   │   ├── app.es.ts
+│   │   ├── app.ja.ts
+│   │   ├── app.vi.ts
+│   │   ├── app.zh.ts
+│   │   ├── common.en.ts
+│   │   ├── common.es.ts
+│   │   ├── common.ja.ts
+│   │   ├── common.vi.ts
+│   │   ├── common.zh.ts
+│   │   ├── tools.en.ts
+│   │   ├── tools.ja.ts
+│   │   ├── tools.vi.ts
+│   │   └── tools.zh.ts
+│   └── server.ts
+├── next-env.d.ts
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── project-structure.txt
+├── public
+│   ├── favicon.ico
+│   └── vs
+│       ├── base
+│       │   ├── browser
+│       │   │   └── ui
+│       │   │       └── codicons
+│       │   │           └── codicon
+│       │   │               └── codicon.ttf
+│       │   ├── common
+│       │   │   └── worker
+│       │   │       ├── simpleWorker.nls.de.js
+│       │   │       ├── simpleWorker.nls.es.js
+│       │   │       ├── simpleWorker.nls.fr.js
+│       │   │       ├── simpleWorker.nls.it.js
+│       │   │       ├── simpleWorker.nls.ja.js
+│       │   │       ├── simpleWorker.nls.js
+│       │   │       ├── simpleWorker.nls.ko.js
+│       │   │       ├── simpleWorker.nls.ru.js
+│       │   │       ├── simpleWorker.nls.zh-cn.js
+│       │   │       └── simpleWorker.nls.zh-tw.js
+│       │   └── worker
+│       │       └── workerMain.js
+│       ├── basic-languages
+│       │   ├── abap
+│       │   │   └── abap.js
+│       │   ├── apex
+│       │   │   └── apex.js
+│       │   ├── azcli
+│       │   │   └── azcli.js
+│       │   ├── bat
+│       │   │   └── bat.js
+│       │   ├── bicep
+│       │   │   └── bicep.js
+│       │   ├── cameligo
+│       │   │   └── cameligo.js
+│       │   ├── clojure
+│       │   │   └── clojure.js
+│       │   ├── coffee
+│       │   │   └── coffee.js
+│       │   ├── cpp
+│       │   │   └── cpp.js
+│       │   ├── csharp
+│       │   │   └── csharp.js
+│       │   ├── csp
+│       │   │   └── csp.js
+│       │   ├── css
+│       │   │   └── css.js
+│       │   ├── cypher
+│       │   │   └── cypher.js
+│       │   ├── dart
+│       │   │   └── dart.js
+│       │   ├── dockerfile
+│       │   │   └── dockerfile.js
+│       │   ├── ecl
+│       │   │   └── ecl.js
+│       │   ├── elixir
+│       │   │   └── elixir.js
+│       │   ├── flow9
+│       │   │   └── flow9.js
+│       │   ├── freemarker2
+│       │   │   └── freemarker2.js
+│       │   ├── fsharp
+│       │   │   └── fsharp.js
+│       │   ├── go
+│       │   │   └── go.js
+│       │   ├── graphql
+│       │   │   └── graphql.js
+│       │   ├── handlebars
+│       │   │   └── handlebars.js
+│       │   ├── hcl
+│       │   │   └── hcl.js
+│       │   ├── html
+│       │   │   └── html.js
+│       │   ├── ini
+│       │   │   └── ini.js
+│       │   ├── java
+│       │   │   └── java.js
+│       │   ├── javascript
+│       │   │   └── javascript.js
+│       │   ├── julia
+│       │   │   └── julia.js
+│       │   ├── kotlin
+│       │   │   └── kotlin.js
+│       │   ├── less
+│       │   │   └── less.js
+│       │   ├── lexon
+│       │   │   └── lexon.js
+│       │   ├── liquid
+│       │   │   └── liquid.js
+│       │   ├── lua
+│       │   │   └── lua.js
+│       │   ├── m3
+│       │   │   └── m3.js
+│       │   ├── markdown
+│       │   │   └── markdown.js
+│       │   ├── mdx
+│       │   │   └── mdx.js
+│       │   ├── mips
+│       │   │   └── mips.js
+│       │   ├── msdax
+│       │   │   └── msdax.js
+│       │   ├── mysql
+│       │   │   └── mysql.js
+│       │   ├── objective-c
+│       │   │   └── objective-c.js
+│       │   ├── pascal
+│       │   │   └── pascal.js
+│       │   ├── pascaligo
+│       │   │   └── pascaligo.js
+│       │   ├── perl
+│       │   │   └── perl.js
+│       │   ├── pgsql
+│       │   │   └── pgsql.js
+│       │   ├── php
+│       │   │   └── php.js
+│       │   ├── pla
+│       │   │   └── pla.js
+│       │   ├── postiats
+│       │   │   └── postiats.js
+│       │   ├── powerquery
+│       │   │   └── powerquery.js
+│       │   ├── powershell
+│       │   │   └── powershell.js
+│       │   ├── protobuf
+│       │   │   └── protobuf.js
+│       │   ├── pug
+│       │   │   └── pug.js
+│       │   ├── python
+│       │   │   └── python.js
+│       │   ├── qsharp
+│       │   │   └── qsharp.js
+│       │   ├── r
+│       │   │   └── r.js
+│       │   ├── razor
+│       │   │   └── razor.js
+│       │   ├── redis
+│       │   │   └── redis.js
+│       │   ├── redshift
+│       │   │   └── redshift.js
+│       │   ├── restructuredtext
+│       │   │   └── restructuredtext.js
+│       │   ├── ruby
+│       │   │   └── ruby.js
+│       │   ├── rust
+│       │   │   └── rust.js
+│       │   ├── sb
+│       │   │   └── sb.js
+│       │   ├── scala
+│       │   │   └── scala.js
+│       │   ├── scheme
+│       │   │   └── scheme.js
+│       │   ├── scss
+│       │   │   └── scss.js
+│       │   ├── shell
+│       │   │   └── shell.js
+│       │   ├── solidity
+│       │   │   └── solidity.js
+│       │   ├── sophia
+│       │   │   └── sophia.js
+│       │   ├── sparql
+│       │   │   └── sparql.js
+│       │   ├── sql
+│       │   │   └── sql.js
+│       │   ├── st
+│       │   │   └── st.js
+│       │   ├── swift
+│       │   │   └── swift.js
+│       │   ├── systemverilog
+│       │   │   └── systemverilog.js
+│       │   ├── tcl
+│       │   │   └── tcl.js
+│       │   ├── twig
+│       │   │   └── twig.js
+│       │   ├── typescript
+│       │   │   └── typescript.js
+│       │   ├── vb
+│       │   │   └── vb.js
+│       │   ├── wgsl
+│       │   │   └── wgsl.js
+│       │   ├── xml
+│       │   │   └── xml.js
+│       │   └── yaml
+│       │       └── yaml.js
+│       ├── editor
+│       │   ├── editor.main.css
+│       │   ├── editor.main.js
+│       │   ├── editor.main.nls.de.js
+│       │   ├── editor.main.nls.es.js
+│       │   ├── editor.main.nls.fr.js
+│       │   ├── editor.main.nls.it.js
+│       │   ├── editor.main.nls.ja.js
+│       │   ├── editor.main.nls.js
+│       │   ├── editor.main.nls.ko.js
+│       │   ├── editor.main.nls.ru.js
+│       │   ├── editor.main.nls.zh-cn.js
+│       │   └── editor.main.nls.zh-tw.js
+│       ├── language
+│       │   ├── css
+│       │   │   ├── cssMode.js
+│       │   │   └── cssWorker.js
+│       │   ├── html
+│       │   │   ├── htmlMode.js
+│       │   │   └── htmlWorker.js
+│       │   ├── json
+│       │   │   ├── jsonMode.js
+│       │   │   └── jsonWorker.js
+│       │   └── typescript
+│       │       ├── tsMode.js
+│       │       └── tsWorker.js
+│       └── loader.js
+├── service
+│   ├── base.ts
+│   ├── index.ts
+│   └── vercel.json
+├── tailwind.config.js
+├── tsconfig.json
+├── types
+│   ├── app.ts
+│   ├── base.ts
+│   ├── log.ts
+│   └── tools.ts
+├── typography.js
+└── utils
+    ├── prompt.ts
+    ├── string.ts
+    └── tools.ts
+
+172 directories, 301 files
