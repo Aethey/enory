@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './animations.css';
+@import './utilities.css';
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -131,9 +134,11 @@ a {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -149,9 +154,11 @@ a {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -168,6 +175,7 @@ a {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -184,10 +192,12 @@ a {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   50% {
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(10px);
@@ -195,15 +205,19 @@ a {
 }
 
 .animate-fade-in-out {
-  animation: fadeInOut 3s ease-in-out infinite; /* 动画持续3秒，循环 */
+  animation: fadeInOut 3s ease-in-out infinite;
+  /* 动画持续3秒，循环 */
 }
 
 /* 音符跳动动画 */
 @keyframes bounceNote {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scaleY(0.5);
     opacity: 0.6;
   }
+
   50% {
     transform: scaleY(1);
     opacity: 1;
