@@ -159,14 +159,15 @@ const Main: FC<IMainProps> = () => {
 
   const handleConversationIdChange = (id: string) => {
     if (id === '-1') {
-      const newInputs = {} // 如果需要默认输入值，在这里设置
-      handleStartChat(newInputs)
+      // 重置所有相关状态
+      setChatNotStarted() // 重置聊天状态
       setConversationIdChangeBecauseOfNew(false)
+      const newInputs = {}
+      handleStartChat(newInputs)
     }
     else {
       setConversationIdChangeBecauseOfNew(false)
     }
-    // trigger handleConversationSwitch
     setCurrConversationId(id, APP_ID)
     hideSidebar()
   }
@@ -624,10 +625,10 @@ const Main: FC<IMainProps> = () => {
       <main className='container mx-auto px-4 py-6'>
         {inited && (
           <div className='mb-6 overflow-x-auto'>
-            <div className='flex gap-3 pb-2'>
+            <div className='flex gap-3 pb-2 items-center'>
               <button
                 onClick={() => handleConversationIdChange('-1')}
-                className='flex items-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors'
+                className='flex items-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors shrink-0'
               >
                 <PlusIcon className='w-4 h-4 mr-2' />
                 {t('app.chat.newChat')}
@@ -637,7 +638,14 @@ const Main: FC<IMainProps> = () => {
                 <button
                   key={item.id}
                   onClick={() => handleConversationIdChange(item.id)}
-                  className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap
+                  className={`
+                    px-4 py-2 
+                    rounded-full 
+                    transition-colors 
+                    whitespace-nowrap 
+                    max-w-[200px] 
+                    truncate 
+                    shrink-0
                     ${item.id === currConversationId
                       ? 'bg-gray-800 text-white'
                       : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
