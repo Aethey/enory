@@ -243,3 +243,16 @@ a {
 .animate-bounce-note.delay-400 {
   animation-delay: 0.4s;
 }
+
+/* 隐藏滚动条 */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari 和 Edge */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE 和 Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}

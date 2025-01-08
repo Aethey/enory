@@ -617,48 +617,51 @@ const Main: FC<IMainProps> = () => {
     return <Loading type='app' />
 
   return (
-    <div className='min-h-screen bg-gray-100'>
-      <header className='px-6 h-16 flex items-center bg-white/80 backdrop-blur-sm border-b border-gray-200'>
-        <h1 className='text-xl font-semibold text-gray-800'>{APP_INFO.title}</h1>
+    <div className='min-h-screen bg-gradient-to-r from-gray-900 via-brown-700 to-gray-800'>
+      <header className='px-6 h-16 flex items-center bg-gradient-to-r from-gray-800 via-brown-600 to-gray-700 shadow-lg'>
+        <h1 className='text-xl font-semibold text-white'>{APP_INFO.title}</h1>
       </header>
 
       <main className='container mx-auto px-4 py-6'>
         {inited && (
-          <div className='mb-6 overflow-x-auto'>
-            <div className='flex gap-3 pb-2 items-center'>
-              <button
-                onClick={() => handleConversationIdChange('-1')}
-                className='flex items-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors shrink-0'
-              >
-                <PlusIcon className='w-4 h-4 mr-2' />
-                {t('app.chat.newChat')}
-              </button>
-
-              {conversationList.map(item => (
+          <div className='flex justify-center'>
+            <div className='w-2/3 overflow-x-auto scrollbar-hide'>
+              <div className='flex gap-3 pb-2 items-center'>
                 <button
-                  key={item.id}
-                  onClick={() => handleConversationIdChange(item.id)}
-                  className={`
-                    px-4 py-2 
-                    rounded-full 
-                    transition-colors 
-                    whitespace-nowrap 
-                    max-w-[200px] 
-                    truncate 
-                    shrink-0
-                    ${item.id === currConversationId
-                      ? 'bg-gray-800 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
-                    }`}
+                  onClick={() => handleConversationIdChange('-1')}
+                  className='flex items-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors shrink-0'
                 >
-                  {item.name}
+                  <PlusIcon className='w-4 h-4 mr-2' />
+                  {t('app.chat.newChat')}
                 </button>
-              ))}
+
+                {conversationList.map(item => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleConversationIdChange(item.id)}
+                    className={`
+                   px-4 py-2 
+                   rounded-full 
+                   transition-colors 
+                   whitespace-nowrap 
+                   max-w-[200px] 
+                   truncate 
+                   shrink-0
+                   ${item.id === currConversationId
+                        ? 'bg-gradient-to-r from-gray-700 to-gray-800 text-white shadow-md'
+                        : 'bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white'
+                      }`}
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+
         )}
 
-        <div className='bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden'>
+        <div className='bg-gradient-to-r from-gray-900 via-brown-700 to-gray-800 rounded-xl overflow-hidden shadow-lg'>
           <ConfigSence
             conversationName={conversationName}
             hasSetInputs={hasSetInputs}
@@ -673,7 +676,7 @@ const Main: FC<IMainProps> = () => {
 
           {hasSetInputs && (
             <div className='relative h-[calc(100vh-20rem)]'>
-              <div className='h-full overflow-y-auto' ref={chatListDomRef}>
+              <div className='h-full overflow-y-auto scrollbar-hide' ref={chatListDomRef}>
                 <Chat
                   chatList={chatList}
                   onSend={handleSend}
