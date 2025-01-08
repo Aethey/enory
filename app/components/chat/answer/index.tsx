@@ -168,12 +168,25 @@ const Answer: FC<IAnswerProps> = ({
   return (
     <div key={id}>
       <div className='flex items-start'>
-        <div className={`${s.answerIcon} w-10 h-10 shrink-0`}>
-          {isResponding
-            && <div className={s.typeingIcon}>
+        <div className={`${s.answerIcon} w-10 h-10 shrink-0 rounded-lg overflow-hidden flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500`}>
+          {isResponding ? (
+            <div className={s.typeingIcon}>
               <LoadingAnim type='avatar' />
             </div>
-          }
+          ) : (
+
+            <div className="animate-spin">
+              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" strokeWidth={2} />
+                <path strokeLinecap="round" strokeWidth={2} d="M12 6v6l4 2" />
+              </svg>
+            </div>
+
+            // 选项3：渐变背景动画
+            /*
+            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-gradient" />
+            */
+          )}
         </div>
         <div className={`${s.answerWrap}`}>
           <div className={`${s.answer} relative text-sm text-gray-900`}>

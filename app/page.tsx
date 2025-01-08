@@ -36,8 +36,8 @@ export default function HomePage() {
 
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode
-        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
-        : 'bg-gradient-to-br from-gray-50 via-gray-100 to-white text-gray-800'
+      ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
+      : 'bg-gradient-to-br from-gray-50 via-gray-100 to-white text-gray-800'
       }`}>
       {/* 背景元素 */}
       <div className="geometric-background">

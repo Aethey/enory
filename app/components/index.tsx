@@ -22,6 +22,7 @@ import AppUnavailable from '@/app/components/app-unavailable'
 import { API_KEY, APP_ID, APP_INFO, isShowPrompt, promptTemplate } from '@/config'
 import type { Annotation as AnnotationType } from '@/types/log'
 import { addFileInfos, sortAgentSorts } from '@/utils/tools'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 export type IMainProps = {
   params: any
@@ -158,8 +159,9 @@ const Main: FC<IMainProps> = () => {
 
   const handleConversationIdChange = (id: string) => {
     if (id === '-1') {
-      createNewChat()
-      setConversationIdChangeBecauseOfNew(true)
+      const newInputs = {} // 如果需要默认输入值，在这里设置
+      handleStartChat(newInputs)
+      setConversationIdChangeBecauseOfNew(false)
     }
     else {
       setConversationIdChangeBecauseOfNew(false)
@@ -614,28 +616,41 @@ const Main: FC<IMainProps> = () => {
     return <Loading type='app' />
 
   return (
-    <div className='bg-gray-100'>
-      <Header
-        title={APP_INFO.title}
-        isMobile={isMobile}
-        onShowSideBar={showSidebar}
-        onCreateNewChat={() => handleConversationIdChange('-1')}
-      />
-      <div className="flex rounded-t-2xl bg-white overflow-hidden">
-        {/* sidebar */}
-        {!isMobile && renderSidebar()}
-        {isMobile && isShowSidebar && (
-          <div className='fixed inset-0 z-50'
-            style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }}
-            onClick={hideSidebar}
-          >
-            <div className='inline-block' onClick={e => e.stopPropagation()}>
-              {renderSidebar()}
+    <div className='min-h-screen bg-gray-100'>
+      <header className='px-6 h-16 flex items-center bg-white/80 backdrop-blur-sm border-b border-gray-200'>
+        <h1 className='text-xl font-semibold text-gray-800'>{APP_INFO.title}</h1>
+      </header>
+
+      <main className='container mx-auto px-4 py-6'>
+        {inited && (
+          <div className='mb-6 overflow-x-auto'>
+            <div className='flex gap-3 pb-2'>
+              <button
+                onClick={() => handleConversationIdChange('-1')}
+                className='flex items-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors'
+              >
+                <PlusIcon className='w-4 h-4 mr-2' />
+                {t('app.chat.newChat')}
+              </button>
+
+              {conversationList.map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => handleConversationIdChange(item.id)}
+                  className={`px-4 py-2 rounded-full transition-colors whitespace-nowrap
+                    ${item.id === currConversationId
+                      ? 'bg-gray-800 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+                    }`}
+                >
+                  {item.name}
+                </button>
+              ))}
             </div>
           </div>
         )}
-        {/* main */}
-        <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
+
+        <div className='bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden'>
           <ConfigSence
             conversationName={conversationName}
             hasSetInputs={hasSetInputs}
@@ -646,25 +661,24 @@ const Main: FC<IMainProps> = () => {
             canEditInputs={canEditInputs}
             savedInputs={currInputs as Record<string, any>}
             onInputsChange={setCurrInputs}
-          ></ConfigSence>
+          />
 
-          {
-            hasSetInputs && (
-              <div className='relative grow h-[200px] pc:w-[794px] max-w-full mobile:w-full pb-[66px] mx-auto mb-3.5 overflow-hidden'>
-                <div className='h-full overflow-y-auto' ref={chatListDomRef}>
-                  <Chat
-                    chatList={chatList}
-                    onSend={handleSend}
-                    onFeedback={handleFeedback}
-                    isResponding={isResponding}
-                    checkCanSend={checkCanSend}
-                    visionConfig={visionConfig}
-                  />
-                </div>
-              </div>)
-          }
+          {hasSetInputs && (
+            <div className='relative h-[calc(100vh-20rem)]'>
+              <div className='h-full overflow-y-auto' ref={chatListDomRef}>
+                <Chat
+                  chatList={chatList}
+                  onSend={handleSend}
+                  onFeedback={handleFeedback}
+                  isResponding={isResponding}
+                  checkCanSend={checkCanSend}
+                  visionConfig={visionConfig}
+                />
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      </main>
     </div>
   )
 }
